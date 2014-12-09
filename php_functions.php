@@ -168,25 +168,31 @@ function html_checkbox($arr,$elename,$mdv="",$classname=""){
 
 
 /**
-      * 获取显示支付方式的下拉列表框
-      * @param $elename
-      * @param $dv
-      */
-     function html_select($arr,$elename,$dv="",$classname="")
-     {
-          $temp="<select name='$elename' id='$elename' class='".$classname."' >";
-         
-          foreach($arr as $k=>$v)
-          {
-               $cd="";
-               if($dv==$k) $cd="selected";
-               $temp=$temp."<option value='$k' $cd>$v</option>";
-          }
-
-
-          $temp=$temp."</select>";
-          return $temp;
-     }
+ * 根据数组生成select的代码
+ * @param  [type] $arr         数据源
+ * @param  [type] $elename     id名称
+ * @param  string $mdv         默认值
+ * @param  string $classname   类别名称
+ * @param  string $kv          值的类型,默认为键名
+ * @param  string $othershushi 其它属性
+ * @return [type]              html
+ */
+function ui_select($arr,$elename,$mdv="",$classname="",$kv="v",$othershushi=""){
+    $html="<select name='".$elename."' id='".$elename."' class='".$classname."' ".$othershushi.">";
+    foreach($arr as $k=>$v){
+        
+        $selected="";
+        if($mdv==$k) $selected="selected='selected'";
+        if($kv=="k"){
+            $html.="<option ".$selected." value='".$k."'>".$v."</option>";
+        }else{
+            $html.="<option ".$selected." value='".$v."'>".$v."</option>";
+        }
+        
+    }
+    $html.="</select>";
+    return $html;
+}
 
 
 
