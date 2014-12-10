@@ -1,4 +1,16 @@
 <?php 
+/**
+ * 常用函数库 
+ * 命名规范:
+ * html 前缀 表示函数返回的是生成的html代码
+ * get  前缀  表示获取值
+ * set  前缀  表示经过运算后得到返回的值
+ * ui 前缀  表示格式化html的值后返回
+ * my 重载或组使一些函数功能
+ */
+
+
+
 	/**
 	*给目标字符串进行格式转换
 	 * @param $mstr 源字符串
@@ -61,7 +73,7 @@
 	 * @param $replacem 替换后的内容
 	 *  @param $zc 正则
 	 */
-	function replaceKuohaostr($str,$replacem,$zc)
+	function setKuohaostr($str,$replacem,$zc)
 	{
 		preg_match($zc, $str."",$temp);
 		$temp=(isset($temp))?$temp[1]:"";
@@ -175,10 +187,12 @@ function html_checkbox($arr,$elename,$mdv="",$classname=""){
  * @param  string $classname   类别名称
  * @param  string $kv          值的类型,默认为键名
  * @param  string $othershushi 其它属性
+ * @param   $arr $firoption  第一项的值和显示值 数组[0] 和数组[1] 来表示
  * @return [type]              html
  */
-function ui_select($arr,$elename,$mdv="",$classname="",$kv="v",$othershushi=""){
+function html_select($arr,$elename,$mdv="",$classname="",$kv="v",$othershushi="",$firoption=array()){
     $html="<select name='".$elename."' id='".$elename."' class='".$classname."' ".$othershushi.">";
+    if(count($firoption)>1)$html.="<option value='".$firoption[0]."'>".$firoption[1]."</option>";
     foreach($arr as $k=>$v){
         
         $selected="";
